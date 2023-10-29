@@ -1,1 +1,1 @@
-console.log("This code runs");
+const sortBtn = document.querySelector("#sortBtn");
