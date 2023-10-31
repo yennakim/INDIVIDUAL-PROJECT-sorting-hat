@@ -1,38 +1,33 @@
 const students = [
   {
-  id: 1,
-  name: "Godric Gryffindor",
-  house: "Gryffindor"
-},
-{
-  id: 2,
-  name: "Salazar Slytherin",
-  house: "Slytherin"
-},
-{
-  id: 3,
-  name: "Helga Hufflepuff",
-  house: "Hufflepuff"
-},
-{
-  id: 4,
-  name: "Rowena Ravenclaw",
-  house: "Ravenclaw"
-}
+    id: 1,
+    name: "Godric Gryffindor",
+    house: "Gryffindor",
+  },
+  {
+    id: 2,
+    name: "Salazar Slytherin",
+    house: "Slytherin",
+  },
+  {
+    id: 3,
+    name: "Helga Hufflepuff",
+    house: "Hufflepuff",
+  },
+  {
+    id: 4,
+    name: "Rowena Ravenclaw",
+    house: "Ravenclaw",
+  },
 ];
 
 const introBtn = document.querySelector("#introBtn");
-const form = document.querySelector("form");
 const enrolledStudents = document.querySelector("#enrolledStudents");
-
-const renderToDom = (divId, htmlToRender) => {
-  const selectedDiv = document.querySelector(divId);
-  selectedDiv.innerHTML = htmlToRender;
-}
+const formDiv = document.querySelector("#studentForm");
 
 const formOnDom = () => {
   let domString = "";
-domString += `<div class="card">
+  domString += `<div class="card">
 <div class="card-body">
 <form>
 Student Name:<div class="form-floating mb-3">
@@ -42,24 +37,42 @@ Student Name:<div class="form-floating mb-3">
 </form>
 </div>
 </div>
-</div>`; 
-renderToDom("#studentForm", domString);
+</div>`;
+formDiv.innerHTML = domString;
+const form = document.querySelector("form");
+console.log(form);
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const newStudentObj = {
+    id: students.length + 1,
+    name: document.querySelector("#studentName").value,
+    house: randomize(),
+  };
+//  console.log(newStudentObj.name);
+//  console.log(newStudentObj.house);
+
+})
+
+};
+
+const randomize = () => {
+  const houses = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
+  const randomHouse = Math.floor(Math.random() * houses.length);
+  console.log(houses[randomHouse]);
 }
-
-
 /* Form on DOM
 let domString = "";
 domString += `Student Name: <div class="form-floating mb-3">
 <input type="text" class="form-control " id="studentName" placeholder="Harry Potter">
 <label for="studentName">Name</label>
 </div>`;
-form.innerHTML = domString;
+
 
 */
 
-introBtn.addEventListener("click", () => {
-  formOnDom();
-});
+
 
 const cardsOnDom = (array) => {
   let domString = "";
@@ -74,9 +87,16 @@ const cardsOnDom = (array) => {
       </div>
     </div>
   </div>
-</div>`
+</div>`;
   }
-  renderToDom("#enrolledStudents", domString);
-}
+ enrolledStudents.innerHTML = domString;
+};
+
+
+
+
+introBtn.addEventListener("click", () => {
+  formOnDom();
+});
 
 cardsOnDom(students);
