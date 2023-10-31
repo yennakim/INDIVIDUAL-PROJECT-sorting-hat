@@ -38,30 +38,33 @@ Student Name:<div class="form-floating mb-3">
 </div>
 </div>
 </div>`;
-formDiv.innerHTML = domString;
-const form = document.querySelector("form");
-console.log(form);
+  formDiv.innerHTML = domString;
+  const form = document.querySelector("form");
+  console.log(form);
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  const newStudentObj = {
-    id: students.length + 1,
-    name: document.querySelector("#studentName").value,
-    house: randomize(),
-  };
-//  console.log(newStudentObj.name);
-//  console.log(newStudentObj.house);
+    const newStudentObj = {
+      id: students.length + 1,
+      name: document.querySelector("#studentName").value,
+      house: randomize(),
+    };
+    console.log(newStudentObj.name);
+     console.log(newStudentObj.house);
 
-})
-
+    students.push(newStudentObj);
+    cardsOnDom(students);
+    console.log(students);
+    form.reset();
+  });
 };
 
 const randomize = () => {
   const houses = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
   const randomHouse = Math.floor(Math.random() * houses.length);
-  console.log(houses[randomHouse]);
-}
+  return houses[randomHouse];
+};
 /* Form on DOM
 let domString = "";
 domString += `Student Name: <div class="form-floating mb-3">
@@ -71,8 +74,6 @@ domString += `Student Name: <div class="form-floating mb-3">
 
 
 */
-
-
 
 const cardsOnDom = (array) => {
   let domString = "";
@@ -89,11 +90,8 @@ const cardsOnDom = (array) => {
   </div>
 </div>`;
   }
- enrolledStudents.innerHTML = domString;
+  enrolledStudents.innerHTML = domString;
 };
-
-
-
 
 introBtn.addEventListener("click", () => {
   formOnDom();
