@@ -12,3 +12,14 @@ body {
   width: 50%;
   border: 2px solid purple;
 }
+
+#expelledStudents {
+  width: 50%;
+  border: 2px dotted red;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}

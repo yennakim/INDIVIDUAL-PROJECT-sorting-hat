@@ -21,9 +21,43 @@ const students = [
   },
 ];
 
+const voldysArmy = [];
+
 const introBtn = document.querySelector("#introBtn");
 const enrolledStudents = document.querySelector("#enrolledStudents");
 const formDiv = document.querySelector("#studentForm");
+const expelledStudents = document.querySelector("#expelledStudents");
+const gryffindor = document.querySelector("#gryffindorBtn");
+const slytherin = document.querySelector("#slytherinBtn");
+const hufflepuff = document.querySelector("#hufflepuffBtn");
+const ravenclaw = document.querySelector("#ravenclawBtn");
+
+
+
+const randomize = () => {
+  const houses = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
+  const randomHouse = Math.floor(Math.random() * houses.length);
+  return houses[randomHouse];
+};
+
+
+const cardsOnDom = (array) => {
+  let domString = "";
+  for (student of array) {
+    domString += `<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">${student.name}</h5>
+        <p class="card-text">${student.house}</p>
+        <a href="#" class="btn btn-danger" id="delete--${student.id}">Expel</a>
+      </div>
+    </div>
+  </div>
+</div>`;
+  }
+  enrolledStudents.innerHTML = domString;
+};
 
 const formOnDom = () => {
   let domString = "";
@@ -60,38 +94,50 @@ Student Name:<div class="form-floating mb-3">
   });
 };
 
-const randomize = () => {
-  const houses = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
-  const randomHouse = Math.floor(Math.random() * houses.length);
-  return houses[randomHouse];
-};
-/* Form on DOM
-let domString = "";
-domString += `Student Name: <div class="form-floating mb-3">
-<input type="text" class="form-control " id="studentName" placeholder="Harry Potter">
-<label for="studentName">Name</label>
-</div>`;
+const filter = (array, houseString) => {
+  let newHouseArray = [];
 
-
-*/
-
-const cardsOnDom = (array) => {
-  let domString = "";
-  for (student of students) {
-    domString += `<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">${student.name}</h5>
-        <p class="card-text">${student.house}</p>
-        <a href="#" class="btn btn-danger">Expel</a>
-      </div>
-    </div>
-  </div>
-</div>`;
+  for(const students of array) {
+    if(students.house === houseString) {
+      newHouseArray.push(students);
+    }
   }
-  enrolledStudents.innerHTML = domString;
-};
+  console.log(newHouseArray);
+
+   cardsOnDom(newHouseArray);
+   console.log(cardsOnDom(newHouseArray));
+}
+
+enrolledStudents.addEventListener("click", () => {
+  if (event.target.id.includes("delete")) {
+    const [, id] = event.target.id.split("--");
+
+    const index = students.findIndex((obj) => obj.id === Number(id));
+    const removedStudent = students.splice(index, 1);
+    console.log(removedStudent);    
+    cardsOnDom(students);
+  }
+})
+
+
+
+gryffindor.addEventListener("click", () => {
+  filter(students, "Gryffindor");
+});
+
+slytherin.addEventListener("click", () => {
+  filter(students, "Slytherin");
+})
+
+hufflepuff.addEventListener("click", () => {
+  filter(students, "Hufflepuff");
+})
+
+ravenclaw.addEventListener("click", () => {
+  filter(students, "Ravenclaw");
+})
+
+
 
 introBtn.addEventListener("click", () => {
   formOnDom();
