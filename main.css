@@ -1,25 +1,30 @@
 body {
-  background-color: #f9f8c9;
+  background-color: #590085;
 }
 
-/* https://cdn.pixabay.com/photo/2017/02/04/04/56/hogwarts-2036645_1280.jpg */
-
+#introCard {
+  background-color:gold;
+  color: grey;
+}
 #sortBtn {
   background-color: #00599c;
 }
 
 #enrolledStudents {
   width: 50%;
-  border: 2px solid purple;
+  border: 2px solid #F0CAA3;
+  background-color: #3d7d89;
 }
 
 #expelledStudents {
   width: 50%;
   border: 2px dotted red;
+  background-color: #511015
+  ;
 }
 
 .container {
   display: flex;
   flex-direction: row;
-  gap: 40px;
+  gap: 2px 40px;
 }
