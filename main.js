@@ -21,7 +21,31 @@ const students = [
   },
 ];
 
-const voldysArmy = [];
+const expelledArray = [
+  {id: students.length + 10,
+  name: "Moldy Voldy",
+  house: "No one Nose",}];
+
+const expel = (array) => {
+  let domString = "";
+  for (taco of array) {
+    domString += `<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">${taco.name}</h5>
+        <p class="card-text">House: ${taco.house}</p>
+      </div>
+    </div>
+  </div>
+</div>`;
+
+  }
+  console.log(student)
+  expelledStudents.innerHTML = domString;
+};
+
+
 
 const introBtn = document.querySelector("#introBtn");
 const enrolledStudents = document.querySelector("#enrolledStudents");
@@ -32,9 +56,11 @@ const slytherin = document.querySelector("#slytherinBtn");
 const hufflepuff = document.querySelector("#hufflepuffBtn");
 const ravenclaw = document.querySelector("#ravenclawBtn");
 
+ // TODO: EXPEL
 
 
-const randomize = () => {
+
+ const randomize = () => {
   const houses = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
   const randomHouse = Math.floor(Math.random() * houses.length);
   return houses[randomHouse];
@@ -49,7 +75,7 @@ const cardsOnDom = (array) => {
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">${student.name}</h5>
-        <p class="card-text">${student.house}</p>
+        <p class="card-text">House: ${student.house}</p>
         <a href="#" class="btn btn-danger" id="delete--${student.id}">Expel</a>
       </div>
     </div>
@@ -89,7 +115,6 @@ Student Name:<div class="form-floating mb-3">
 
     students.push(newStudentObj);
     cardsOnDom(students);
-    console.log(students);
     form.reset();
   });
 };
@@ -114,8 +139,11 @@ enrolledStudents.addEventListener("click", () => {
 
     const index = students.findIndex((obj) => obj.id === Number(id));
     const removedStudent = students.splice(index, 1);
-    console.log(removedStudent);    
+    console.log(removedStudent);
+    expelledArray.push(removedStudent[0])    
     cardsOnDom(students);
+    expel(expelledArray);
+    console.log(expelledArray)
   }
 })
 
@@ -143,4 +171,11 @@ introBtn.addEventListener("click", () => {
   formOnDom();
 });
 
-cardsOnDom(students);
+
+
+const startApp = () => {
+  cardsOnDom(students);
+
+}
+
+startApp();
