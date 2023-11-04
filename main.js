@@ -22,9 +22,8 @@ const students = [
 ];
 
 const expelledArray = [
-  {id: students.length + 10,
-  name: "Moldy Voldy",
-  house: "No one Nose",}];
+  { id: students.length + 10, name: "Moldy Voldy", house: "No one Nose" },
+];
 
 const expel = (array) => {
   let domString = "";
@@ -39,13 +38,10 @@ const expel = (array) => {
     </div>
   </div>
 </div>`;
-
   }
-  console.log(student)
+  console.log(student);
   expelledStudents.innerHTML = domString;
 };
-
-
 
 const introBtn = document.querySelector("#introBtn");
 const enrolledStudents = document.querySelector("#enrolledStudents");
@@ -56,16 +52,11 @@ const slytherin = document.querySelector("#slytherinBtn");
 const hufflepuff = document.querySelector("#hufflepuffBtn");
 const ravenclaw = document.querySelector("#ravenclawBtn");
 
- // TODO: EXPEL
-
-
-
- const randomize = () => {
+const randomize = () => {
   const houses = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"];
   const randomHouse = Math.floor(Math.random() * houses.length);
   return houses[randomHouse];
 };
-
 
 const cardsOnDom = (array) => {
   let domString = "";
@@ -111,7 +102,7 @@ Student Name:<div class="form-floating mb-3">
       house: randomize(),
     };
     console.log(newStudentObj.name);
-     console.log(newStudentObj.house);
+    console.log(newStudentObj.house);
 
     students.push(newStudentObj);
     cardsOnDom(students);
@@ -122,16 +113,16 @@ Student Name:<div class="form-floating mb-3">
 const filter = (array, houseString) => {
   let newHouseArray = [];
 
-  for(const students of array) {
-    if(students.house === houseString) {
+  for (const students of array) {
+    if (students.house === houseString) {
       newHouseArray.push(students);
     }
   }
   console.log(newHouseArray);
 
-   cardsOnDom(newHouseArray);
-   console.log(cardsOnDom(newHouseArray));
-}
+  cardsOnDom(newHouseArray);
+  console.log(cardsOnDom(newHouseArray));
+};
 
 enrolledStudents.addEventListener("click", () => {
   if (event.target.id.includes("delete")) {
@@ -140,14 +131,12 @@ enrolledStudents.addEventListener("click", () => {
     const index = students.findIndex((obj) => obj.id === Number(id));
     const removedStudent = students.splice(index, 1);
     console.log(removedStudent);
-    expelledArray.push(removedStudent[0])    
+    expelledArray.push(removedStudent[0]);
     cardsOnDom(students);
     expel(expelledArray);
-    console.log(expelledArray)
+    console.log(expelledArray);
   }
-})
-
-
+});
 
 gryffindor.addEventListener("click", () => {
   filter(students, "Gryffindor");
@@ -155,27 +144,22 @@ gryffindor.addEventListener("click", () => {
 
 slytherin.addEventListener("click", () => {
   filter(students, "Slytherin");
-})
+});
 
 hufflepuff.addEventListener("click", () => {
   filter(students, "Hufflepuff");
-})
+});
 
 ravenclaw.addEventListener("click", () => {
   filter(students, "Ravenclaw");
-})
-
-
+});
 
 introBtn.addEventListener("click", () => {
   formOnDom();
 });
 
-
-
 const startApp = () => {
   cardsOnDom(students);
-
-}
+};
 
 startApp();
