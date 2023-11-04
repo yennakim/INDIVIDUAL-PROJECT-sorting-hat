@@ -3,28 +3,38 @@ body {
 }
 
 #introCard {
-  background-color:gold;
+  background-color: gold;
   color: grey;
 }
-#sortBtn {
-  background-color: #00599c;
+
+#studentForm {
+  margin: auto;
+  width: 50%;
 }
+
+
+
 
 #enrolledStudents {
   width: 50%;
-  border: 2px solid #F0CAA3;
+  border: 2px solid #f0caa3;
   background-color: #3d7d89;
 }
 
 #expelledStudents {
   width: 50%;
   border: 2px dotted red;
-  background-color: #511015
-  ;
+  background-color: #511015;
 }
 
 .container {
   display: flex;
   flex-direction: row;
   gap: 2px 40px;
+}
+
+.filterButtons {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
 }
